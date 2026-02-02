@@ -77,14 +77,15 @@ class AppConfig {
 
     @Bean
     public Drink Birra() {
-        return new Drink("Birra", 1.0, "causa e soluzione di tutti i problemi");
+        return new Drink("Birra", 3.0, "causa e soluzione di tutti i problemi");
     }
 
     @Bean
-    public Menu menu(Pizza margherita, Pizza hawaiianPizza, Pizza doppioProsciutto, Pizza Ajeje, Drink cocaCola, Drink Fanta, Drink acqua, Drink Birra) {
+    public Menu menu(Pizza margherita, Pizza hawaiianPizza, Pizza doppioProsciutto, Pizza Ajeje, Topping prosciutto, Topping ananas, Topping funghi, Topping peperoni, Drink cocaCola, Drink Fanta, Drink acqua, Drink Birra) {
         return new Menu(
                 Arrays.asList(margherita, hawaiianPizza, doppioProsciutto, Ajeje),
-                Arrays.asList(cocaCola, Fanta, acqua, Birra)
+                Arrays.asList(cocaCola, Fanta, acqua, Birra),
+                Arrays.asList(prosciutto, ananas, funghi, peperoni)
         );
     }
 }
