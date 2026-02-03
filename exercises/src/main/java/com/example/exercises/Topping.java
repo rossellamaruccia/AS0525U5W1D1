@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-class Topping implements MenuItem {
+class Topping extends MenuElement implements MenuItem {
     private String name;
     private double price;
     private String nutritionalInfo;

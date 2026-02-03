@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-class Drink implements MenuItem {
+class Drink extends MenuElement implements MenuItem {
     private String name;
     private double price;
     private String nutritionalInfo;

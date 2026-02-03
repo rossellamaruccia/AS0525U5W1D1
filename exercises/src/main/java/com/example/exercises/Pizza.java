@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-class Pizza implements MenuItem {
+class Pizza extends MenuElement implements MenuItem {
     private String baseName = "Margherita";
     private double basePrice = 5.0;
     private String baseNutritionalInfo = "Pomodoro, Mozzarella";

@@ -2,6 +2,8 @@ package com.example.exercises;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.PropertySource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,6 +11,7 @@ import java.util.List;
 
 
 @Configuration
+@PropertySource("application.properties")
 class AppConfig {
 
     @Bean
@@ -58,6 +61,18 @@ class AppConfig {
         toppings.add(peperoni);
         toppings.add(peperoni);
         return new Pizza(toppings, "Peperonata e topi morti");
+    }
+
+    @Bean
+    @Primary
+    public Tavolo tavoloStandard() {
+        return new Tavolo();
+    }
+
+    @Bean
+    @Primary
+    public Ordine ordineStandard() {
+        return new Ordine(4);
     }
 
     @Bean
