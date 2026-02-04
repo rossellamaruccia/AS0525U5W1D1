@@ -1,12 +1,14 @@
 package com.example.exercises;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.List;
 
-@Data
+@Getter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 class Menu {
@@ -18,19 +20,19 @@ class Menu {
         System.out.println("---- MENU PIZZERIA ----");
         System.out.println("PIZZE:");
         for (Pizza pizza : pizze) {
-            System.out.printf("%s - €%.2f\n", pizza.getName(), pizza.getPrice());
-            System.out.println("  Ingredienti: " + pizza.getNutritionalInfo());
+            System.out.println(pizza.getName() + ", " + pizza.getPrice() + "€");
+            System.out.println("  Ingredienti: " + pizza.getToppings());
         }
 
-        System.out.println("\nTOPPINGS:");
+        System.out.println("TOPPINGS:");
         for (Topping topping : toppings) {
-            System.out.printf("%s - €%.2f\n", topping.getName(), topping.getPrice());
-            System.out.println("  Info nutrizionali: " + topping.getNutritionalInfo());
+            System.out.println(topping.getName() + ", " + topping.getPrice() + "€");
+            System.out.println("  Info nutrizionali: " + topping.getCalories() + " calorie.");
         }
-        System.out.println("\nBEVANDE:");
+        System.out.println("BEVANDE:");
         for (Drink drink : drinks) {
-            System.out.printf("%s - €%.2f\n", drink.getName(), drink.getPrice());
-            System.out.println("  Info nutrizionali: " + drink.getNutritionalInfo());
+            System.out.printf(drink.getName() + ", " + drink.getPrice() + "€");
+            System.out.println("  Info nutrizionali: " + drink.getCalories() + " calorie");
         }
     }
 }

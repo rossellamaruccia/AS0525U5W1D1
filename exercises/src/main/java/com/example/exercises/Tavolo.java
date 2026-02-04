@@ -1,22 +1,20 @@
 package com.example.exercises;
 
-import lombok.Generated;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-@Component
+@AllArgsConstructor
+@Getter
 public class Tavolo {
-    @Generated
-    private long id;
-    private long max_coperti;
-    @Autowired
-    private Ordine ordine;
-    private Stato stato;
+    private int numTavolo;
+    private int numMaxCoperti;
+    private boolean isFree;
+    private double costoCoperto;
 
-    public Tavolo() {
+    public void print() {
+        System.out.println("numero tavolo--> " + numTavolo);
+        System.out.println("numero massimo coperti--> " + numMaxCoperti);
+        System.out.println("occupato/libero--> " + (this.isFree ? "Libero" : "Occupato"));
     }
 
-    public void setOrdine(Ordine ordine) {
-        this.ordine = ordine;
-    }
 }

@@ -1,14 +1,20 @@
 package com.example.exercises;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-class Drink extends MenuElement implements MenuItem {
+@Getter
+@Setter
+public class Drink extends MenuElement {
     private String name;
-    private double price;
-    private String nutritionalInfo;
+
+    public Drink(String name, int calories, double price) {
+        super(calories, price);
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Drink {" + name + ", " + calories + ", " + price + "}";
+    }
 }

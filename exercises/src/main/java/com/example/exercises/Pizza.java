@@ -1,51 +1,44 @@
 package com.example.exercises;
 
-import lombok.Data;
+import lombok.Getter;
 
-import java.util.ArrayList;
 import java.util.List;
 
-@Data
-class Pizza extends MenuElement implements MenuItem {
-    private String baseName = "Margherita";
-    private double basePrice = 5.0;
-    private String baseNutritionalInfo = "Pomodoro, Mozzarella";
+@Getter
+public class Pizza extends MenuElement {
+    private String name;
+    private List<Topping> toppings;
 
-    private List<Topping> toppings = new ArrayList<>();
-    private String customName;
-
-    public Pizza() {
-    }
-
-    public Pizza(List<Topping> toppings, String customName) {
+    public Pizza(String name, List<Topping> toppings) {
+        super(1050, 5);
+        this.name = name;
         this.toppings = toppings;
-        this.customName = customName;
+        this.calories = setCalories(toppings);
+        this.price = setPrice(toppings);
     }
 
-    @Override
-    public String getName() {
-        if (customName != null && !customName.isEmpty()) {
-            return customName;
+    public int setCalories(List<Topping> toppings) {
+        int tot = 1050;
+        if (toppings != null) {
+            for (int i = 0; i < toppings.size(); i++) {
+                tot += toppings.get(i).getCalories();
+            }
         }
-        return baseName + (toppings.isEmpty() ? "" : " + toppings");
+        return tot;
     }
 
-    @Override
-    public double getPrice() {
-        double toppingsPrice = toppings.stream().mapToDouble(Topping::getPrice).sum();
-        return basePrice + toppingsPrice;
-    }
-
-    @Override
-    public String getNutritionalInfo() {
-        StringBuilder sb = new StringBuilder(baseNutritionalInfo);
-        for (Topping topping : toppings) {
-            sb.append(", ").append(topping.getNutritionalInfo());
+    public double setPrice(List<Topping> toppings) {
+        double price = 5;
+        if (toppings != null) {
+            for (int i = 0; i < toppings.size(); i++) {
+                price += toppings.get(i).getPrice();
+            }
         }
-        return sb.toString();
+        return price;
     }
 
-    public void addTopping(Topping topping) {
-        toppings.add(topping);
+    @Override
+    public String toString() {
+        return "Pizza {" + name + ", " + price + ", " + toppings + " }";
     }
 }

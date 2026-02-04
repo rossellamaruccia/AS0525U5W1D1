@@ -1,5 +1,6 @@
 package com.example.exercises;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -16,27 +17,41 @@ class AppConfig {
 
     @Bean
     public Topping prosciutto() {
-        return new Topping("Prosciutto", 1.5, "Proteine");
+        return new Topping("Prosciutto", 100, 1.5);
+    }
+
+    @Bean
+    public Topping pomodoro() {
+        return new Topping("pomodoro", 100, 1.5);
+    }
+
+    @Bean
+    public Topping mozzarella() {
+        return new Topping("mozzarella", 100, 1.5);
     }
 
     @Bean
     public Topping ananas() {
-        return new Topping("Ananas", 1.0, "Vitamine");
+        return new Topping("Ananas", 250, 3);
     }
 
     @Bean
     public Topping funghi() {
-        return new Topping("Funghi", 1.2, "Fibre");
+        return new Topping("Funghi", 80, 1.5);
     }
 
     @Bean
     public Topping peperoni() {
-        return new Topping("Peperoni", 1.2, "Colore");
+        return new Topping("Peperoni", 120, 2);
     }
 
+    @Primary
     @Bean
     public Pizza margherita() {
-        return new Pizza(); // solo base
+        List<Topping> tList = new ArrayList<>();
+        tList.add(pomodoro());
+        tList.add(mozzarella());
+        return new Pizza("Margherita", tList); // solo base
     }
 
     @Bean
@@ -44,7 +59,7 @@ class AppConfig {
         List<Topping> toppings = new ArrayList<>();
         toppings.add(prosciutto);
         toppings.add(ananas);
-        return new Pizza(toppings, "Pizza Hawaii");
+        return new Pizza("Pizza Hawaii", toppings);
     }
 
     @Bean
@@ -52,7 +67,7 @@ class AppConfig {
         List<Topping> toppings = new ArrayList<>();
         toppings.add(prosciutto);
         toppings.add(prosciutto);
-        return new Pizza(toppings, "Margherita + Doppio Prosciutto");
+        return new Pizza("Doppio Prosciutto", toppings);
     }
 
     @Bean
@@ -60,39 +75,33 @@ class AppConfig {
         List<Topping> toppings = new ArrayList<>();
         toppings.add(peperoni);
         toppings.add(peperoni);
-        return new Pizza(toppings, "Peperonata e topi morti");
+        return new Pizza("Peperonata e topi morti", toppings);
     }
 
-    @Bean
-    @Primary
-    public Tavolo tavoloStandard() {
-        return new Tavolo();
+    @Bean("Tavolo 1")
+    Tavolo getTavolo(@Value("${costoCoperto}") double costoCoperto) {
+        return new Tavolo(1, 5, true, costoCoperto);
     }
 
-    @Bean
-    @Primary
-    public Ordine ordineStandard() {
-        return new Ordine(4);
-    }
 
     @Bean
     public Drink cocaCola() {
-        return new Drink("Coca Cola", 2.0, "Zuccheri");
+        return new Drink("Coca Cola", 200, 3);
     }
 
     @Bean
     public Drink Fanta() {
-        return new Drink("Fanta", 2.0, "anni Novanta");
+        return new Drink("Fanta", 200, 3);
     }
 
     @Bean
     public Drink acqua() {
-        return new Drink("Acqua Naturale", 1.0, "Nessuna Caloria");
+        return new Drink("Acqua Naturale", 0, 1);
     }
 
     @Bean
     public Drink Birra() {
-        return new Drink("Birra", 3.0, "causa e soluzione di tutti i problemi");
+        return new Drink("Birra", 300, 4);
     }
 
     @Bean
